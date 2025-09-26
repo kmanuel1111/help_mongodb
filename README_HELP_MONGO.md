@@ -17,6 +17,7 @@ Esta guía proporciona una referencia rápida y clara de los comandos más utili
       - [Consultas con operadores](#consultas-con-operadores)
       - [Operadores de comparación](#operadores-de-comparación)
       - [Operadores Logicos](#operadores-logicos)
+      - [Operadores de Elemento](#operadores-de-elemento)
       - [Consultas anidadas con operadores de comparación](#consultas-anidadas-con-operadores-de-comparación)
     - [✏️ Actualizaciones](#️-actualizaciones)
     - [🗑️ Eliminación](#️-eliminación)
@@ -211,7 +212,19 @@ db.product.find({ unitsInStock: {$not:{ $gt: 17 }} });
 db.product.find( {"categories.categoryName":{$not:{$in:["Beverages","Seafood","Confections","Condiments"]  } } });
 ``` 
 
+#### Operadores de Elemento
 
+- **$exists** _Existe el Parametro_
+```js
+// Mostrar los que existen con el cambo de age
+db.employee.find({ age:{$exists:true }}  );
+
+// Mostrar los que NO existen con el cambo de age
+db.employee.find({ age:{$exists:false }}  );
+
+// Mostrar los que existen y agregar otro operador adicional
+db.employee.find({ age:{$exists:true, $gt: 35 }}  );
+```
 
 #### Consultas anidadas con operadores de comparación
 
