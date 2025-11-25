@@ -40,6 +40,7 @@ sudo systemctl disable mongod      # Desactivar al iniciar el sistema
 mongosh --help                             # Ver ayuda general
 mongosh "mongodb://localhost:27017/admin"  # Conexión por URI
 mongosh --port 27018                       # Conexion por puerto
+mongosh --port 27017 -u "kzambrano" -p "kmanuel11" --authenticationDatabase admin # Conexion por puerto con autenticacion
 ```
 
 ### 📂 Navegación y gestión de bases de datos
@@ -61,7 +62,10 @@ show collections                 // Listar colecciones
 # * --c Coleccion de la base de datos donde importar los archivos
 # * --jsonArry Dice que el documento a importar contiene arrays de json
 # * --drop Elimina la base de datos y collecion antes de realizar la importacion
-mongoimport empleado.json --host localhost --port 27018 -d startup -c empleados --jsonArray --drop
+# * --authenticationDatabase Base de datos a donde se conecta
+# * -u Usuario de la base de datos
+# * -p Contraseña de la base de datos
+mongoimport empleado.json --host localhost --port 27018 -d startup -c empleados --jsonArray --drop --authenticationDatabase admin -u "kzambrano" -p "kmanuel11"
 ```
 
 ```js
