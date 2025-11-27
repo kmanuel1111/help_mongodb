@@ -19,6 +19,8 @@ Esta guía proporciona una referencia rápida y clara de los comandos más utili
       - [Operadores Logicos](#operadores-logicos)
       - [Operadores de Elemento](#operadores-de-elemento)
       - [Operadores de Evaluacion](#operadores-de-evaluacion)
+      - [Operadores de Array](#operadores-de-array)
+      - [Consultas anidadas con operadores de comparación](#consultas-anidadas-con-operadores-de-comparación)
     - [✏️ Actualizaciones](#️-actualizaciones)
     - [🗑️ Eliminación](#️-eliminación)
     - [🛠️ Administración](#️-administración)
@@ -272,7 +274,7 @@ db.employee.find({$expr:{$eq:["$delay","$tolerance" ]} });
 ```
 
 - **$mod** _Divisor_
-````js
+```js
 // NO ACEPTA DECIMALES
 // Muestra los documentos que cuando la edad sea divisible entre 2 (par)
 db.employee.find({age:{$mod:[2,0]} });
@@ -280,6 +282,29 @@ db.employee.find({age:{$mod:[2,0]} });
 db.employee.find({age:{$mod:[2,1]} });
 // Muestra los documentos que cuando la edad sea divisible entre 3 
 db.employee.find({age:{$mod:[3,0]} });
+```
+
+#### Operadores de Array
+
+- **$all** _Coincidencia con todos los valores_
+```js
+// Buscar documentos que coincidan con todos los valores especificados
+db.product.find({ tags: { $all: ["fruit", "organic"] } });
+// Equivalente a 
+db.product.find({$and:[{tags:"fruit"},{tags:"organic"}]});0
+// Equivalente a 
+db.product.find({tags:{$in:["fruit","organic"]}});
+```
+
+- **$elemMatch** _Coincidencia con un elemento_
+```js
+// Buscar documentos con un elemento que coincida con la condición
+db.product.find({ tags: { $elemMatch: { $eq: "fruit" } } });
+```
+- **$size** _Tamaño del array_
+```js
+// Buscar documentos con un array de tamaño específico
+db.product.find({ tags: { $size: 2 } });
 ```
 
 #### Consultas anidadas con operadores de comparación
